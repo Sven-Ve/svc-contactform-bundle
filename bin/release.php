@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-$version = "v1.0.0";
-$message = "first public version";
+$version = "v1.0.1";
+$message = "changed yaml config format";
 
 file_put_contents("CHANGELOG.md", "\n\n## Version " . $version, FILE_APPEND);
 file_put_contents("CHANGELOG.md", "\n*" . date("r") . "*", FILE_APPEND);
