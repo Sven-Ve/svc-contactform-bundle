@@ -1,21 +1,19 @@
-Installation
-============
+# Installation
 
 Make sure Composer is installed globally, as explained in the
 [installation chapter](https://getcomposer.org/doc/00-intro.md)
 of the Composer documentation.
 
-Applications that use Symfony Flex
-----------------------------------
+## Applications that use Symfony Flex
+
 
 Open a command console, enter your project directory and execute:
 
 ```console
-$ composer require svc/util-bundle
+$ composer require svc/contactform-bundle
 ```
 
-Applications that don't use Symfony Flex
-----------------------------------------
+## Applications that don't use Symfony Flex
 
 ### Step 1: Download the Bundle
 
@@ -23,7 +21,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
 
 ```console
-$ composer require svc/util-bundle
+$ composer require svc/contactform-bundle
 ```
 
 ### Step 2: Enable the Bundle
@@ -36,6 +34,6 @@ in the `config/bundles.php` file of your project:
 
 return [
     // ...
-    Svc\UtilBundle\SvcUtilBundle::class => ['all' => true],
+    Svc\UtilBundle\SvcContactformBundle::class => ['all' => true],
 ];
 ```

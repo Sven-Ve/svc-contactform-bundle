@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Svc\ContactformBundle\Tests\Controller;
 
 use Svc\ContactformBundle\Tests\SvcContactformTestingKernel;
-use Svc\ContactformBundle\Tests\SvcUtilTestingKernel;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
