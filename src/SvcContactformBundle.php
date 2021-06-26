@@ -1,10 +1,10 @@
 <?php
 
-namespace Svc\UtilBundle;
+namespace Svc\ContactformBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SvcUtilBundle extends Bundle {
+class SvcContactformBundle extends Bundle {
 
   public function getPath(): string
   {

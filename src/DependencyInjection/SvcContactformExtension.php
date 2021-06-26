@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class SvcUtilExtension extends Extension
+class SvcContactformExtension extends Extension
 {
   public function load(array $configs, ContainerBuilder $container)
   {
@@ -21,7 +21,7 @@ class SvcUtilExtension extends Extension
     $configuration = $this->getConfiguration($configs, $container);
     $config = $this->processConfiguration($configuration, $configs);
 
-    $definition = $container->getDefinition('svc_util.controller.contact');
+    $definition = $container->getDefinition('svc_contactform.controller.contact');
     $definition->setArgument(0, $config["contact_form"]['enable_captcha']);
     $definition->setArgument(1, $config["contact_form"]['contact_mail']);
     $definition->setArgument(2, $config["contact_form"]['route_after_send']);

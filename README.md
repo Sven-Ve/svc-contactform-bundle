@@ -1,11 +1,7 @@
-Overview
-========
+# Svc/ContactformBundle
+
+Bundle for a contact form and sending the mail with contact infos
 
 * [Installation](docs/installation.md)
 * [Usage](docs/usage.md)
 
-**Services:**
-* [EnvInfoHelper](docs/envinfohelper.md)
-* [NetworkHelper](docs/networkhelper.md)
-* [MailHelper](docs/mailhelper.md)
-* [ContactForm](docs/contactform.md)

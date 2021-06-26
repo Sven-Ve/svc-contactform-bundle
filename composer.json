@@ -13,7 +13,7 @@
     "php": "^7.3.0 | ^8.0.0",
     "symfony/framework-bundle": "^5",
     "symfony/options-resolver": "^5",
-    "svc/util-bundle": "^1",
+    "svc/util-bundle": "^1|dev-main",
     "symfony/translation": "^5",
     "twig/twig": "^2.12|^3.0",
     "symfony/twig-bundle": "^4.3|^5.0",
