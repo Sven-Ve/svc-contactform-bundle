@@ -1,11 +1,12 @@
 <?php
 
-namespace Svc\UtilBundle\Tests;
+namespace Svc\ContactformBundle\Tests;
 
 require_once(__dir__ . "/Dummy/AppKernelDummy.php");
 
 use App\Kernel as AppKernel;
 use Symfony\Component\HttpKernel\Kernel;
+use Svc\ContactformBundle\SvcContactformBundle;
 use Svc\UtilBundle\SvcUtilBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -17,7 +18,7 @@ use Symfony\Bundle\TwigBundle\TwigBundle;
 /**
  * Test kernel
  */
-class SvcUtilTestingKernel extends Kernel
+class SvcContactformTestingKernel extends Kernel
 {
   use MicroKernelTrait;
 
@@ -41,9 +42,10 @@ class SvcUtilTestingKernel extends Kernel
   public function registerBundles(): array
   {
     return [
-      new SvcUtilBundle(),
+      new SvcContactformBundle(),
       new FrameworkBundle(),
       new TwigBundle(),
+      new SvcUtilBundle()
     ];
   }
 

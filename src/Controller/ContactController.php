@@ -34,7 +34,7 @@ class ContactController extends AbstractController
 
 
   /**
-   * display and handlethe contactfrom
+   * display and handle the contactfrom
    *
    * @param Request $request
    * @param MailerHelper $mailHelper
