@@ -5,8 +5,11 @@
 [![License](https://poser.pugx.org/svc/contactform-bundle/license)](https://packagist.org/packages/svc/contactform-bundle) 
 [![Total Downloads](https://poser.pugx.org/svc/contactform-bundle/downloads)](https://packagist.org/packages/svc/contactform-bundle)
 
-Bundle for a contact form and sending the mail with contact infos
+Bundle for a contact form and sending the mail with contact info
 
 * [Installation](docs/installation.md)
 * [Usage](docs/usage.md)
 
+### Screenshot
+
+![Contact form](docs/images/contactform.png)
