@@ -32,6 +32,22 @@ svc_contactform:
         route_after_send:   index
 ```
 
+## CSS
+You have to include bootstrap in your base template.<br />
+We provide a scss file. You have to integrate (call) this file or modify the layout. Feel free to modify the layout :-)
+
+```scss
+// assets/styles/layout/_svc-contactform.scss
+.svc-contactform {
+  width: 100%;
+  max-width: 700px;
+  padding: 15px;
+  margin: auto;
+  border-radius: 15px;
+	box-shadow: 0 5px 5px rgba(0,0,0,.4);
+}
+```
+
 ## Call the controller
 integrate the contactform controller via path "svc_contact_form"
 
