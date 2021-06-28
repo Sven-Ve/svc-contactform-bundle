@@ -28,7 +28,7 @@ class ContactFormTest extends TypeTestCase
     $this->assertNull($form->getData()['subject']);
   }
 
-    /**
+  /**
    * @test
    */
   public function testFormCopyToMe()
@@ -44,5 +44,4 @@ class ContactFormTest extends TypeTestCase
     $this->assertTrue($form->isSynchronized());
     $this->assertTrue($form->getData()['copyToMe']);
   }
-
 }

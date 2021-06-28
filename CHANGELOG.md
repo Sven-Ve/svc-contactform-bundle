@@ -23,3 +23,8 @@
 ## Version v1.1.2
 *Sun, 27 Jun 2021 21:04:07 +0000*
 - added form test
+
+
+## Version v1.1.3
+*Mon, 28 Jun 2021 14:51:59 +0000*
+- If user is logged in, email and name will be prefilled (if fields exist in entity User)

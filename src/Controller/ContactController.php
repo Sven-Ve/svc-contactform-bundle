@@ -42,7 +42,26 @@ class ContactController extends AbstractController
    */
   public function contactForm(Request $request, MailerHelper $mailHelper): Response
   {
-    $form = $this->createForm(ContactType::class, null, [
+    $data['email'] = '';
+    $data['name'] = '';
+    $user = $this->getUser();
+    if ($user) {
+      if (method_exists($user, 'getEmail')) {
+        $data['email'] = $user->getEmail();
+      }
+      if (method_exists($user, 'getNickname')) {
+        $data['name'] = $user->getNickname();
+      } else {
+        if (method_exists($user, 'getFirstname')) {
+          $data['name'] = $user->getFirstname();
+        }
+        if (method_exists($user, 'getLastname')) {
+          $data['name'] .= ' ' . $user->getLastname();
+        }
+      }
+    }
+
+    $form = $this->createForm(ContactType::class, $data, [
       'enableCaptcha' => $this->enableCaptcha, 'copyToMe' => $this->copyToMe
     ]);
     $form->handleRequest($request);
