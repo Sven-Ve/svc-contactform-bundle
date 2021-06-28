@@ -2,6 +2,7 @@
 
 namespace Svc\ContactformBundle\Controller;
 
+use Exception;
 use Svc\ContactformBundle\Form\ContactType;
 use Svc\UtilBundle\Service\MailerHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,21 +45,24 @@ class ContactController extends AbstractController
   {
     $data['email'] = '';
     $data['name'] = '';
-    $user = $this->getUser();
-    if ($user) {
-      if (method_exists($user, 'getEmail')) {
-        $data['email'] = $user->getEmail();
-      }
-      if (method_exists($user, 'getNickname')) {
-        $data['name'] = $user->getNickname();
-      } else {
-        if (method_exists($user, 'getFirstname')) {
-          $data['name'] = $user->getFirstname();
+    try {
+      $user = $this->getUser();
+      if ($user) {
+        if (method_exists($user, 'getEmail')) {
+          $data['email'] = $user->getEmail();
         }
-        if (method_exists($user, 'getLastname')) {
-          $data['name'] .= ' ' . $user->getLastname();
+        if (method_exists($user, 'getNickname')) {
+          $data['name'] = $user->getNickname();
+        } else {
+          if (method_exists($user, 'getFirstname')) {
+            $data['name'] = $user->getFirstname();
+          }
+          if (method_exists($user, 'getLastname')) {
+            $data['name'] .= ' ' . $user->getLastname();
+          }
         }
       }
+    } catch (Exception $e) {
     }
 
     $form = $this->createForm(ContactType::class, $data, [

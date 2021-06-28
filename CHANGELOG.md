@@ -28,3 +28,8 @@
 ## Version v1.1.3
 *Mon, 28 Jun 2021 14:51:59 +0000*
 - If user is logged in, email and name will be prefilled (if fields exist in entity User)
+
+
+## Version v1.1.4
+*Mon, 28 Jun 2021 15:45:31 +0000*
+- Fix exception, if security bundle not exists
