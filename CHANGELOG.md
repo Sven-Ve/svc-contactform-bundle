@@ -17,7 +17,8 @@
 
 ## Version v1.1.1
 *Sun, 27 Jun 2021 10:31:22 +0000*
-- added suggestions in composer.json, added badges in README
+- added suggestions in composer.json
+- added badges in README
 
 
 ## Version v1.1.2
