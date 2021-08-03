@@ -34,3 +34,8 @@
 ## Version v1.1.4
 *Mon, 28 Jun 2021 15:45:31 +0000*
 - Fix exception, if security bundle not exists
+
+
+## Version v1.1.5
+*Tue, 03 Aug 2021 10:42:30 +0000*
+- added static code analysis (phpstan)
