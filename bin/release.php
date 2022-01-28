@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-$version = "v1.1.6";
-$message = "removed creation of config file beacause we have a recipe now";
+$version = "v1.2.0";
+$message = "works with SvcUtilBundle 2.0";
 
 file_put_contents("CHANGELOG.md", "\n\n## Version " . $version, FILE_APPEND);
 file_put_contents("CHANGELOG.md", "\n*" . date("r") . "*", FILE_APPEND);

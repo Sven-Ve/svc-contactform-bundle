@@ -44,3 +44,8 @@
 ## Version v1.1.6
 *Wed, 04 Aug 2021 08:52:19 +0000*
 - removed creation of config file beacause we have a recipe now
+
+
+## Version v1.2.0
+*Fri, 28 Jan 2022 21:29:08 +0000*
+- works with SvcUtilBundle 2.0
