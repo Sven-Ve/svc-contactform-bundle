@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-$version = "v1.2.0";
-$message = "works with SvcUtilBundle 2.0";
+$version = "v1.2.1";
+$message = "Fixed phpstan errors";
 
 file_put_contents("CHANGELOG.md", "\n\n## Version " . $version, FILE_APPEND);
 file_put_contents("CHANGELOG.md", "\n*" . date("r") . "*", FILE_APPEND);

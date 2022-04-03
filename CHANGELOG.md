@@ -49,3 +49,8 @@
 ## Version v1.2.0
 *Fri, 28 Jan 2022 21:29:08 +0000*
 - works with SvcUtilBundle 2.0
+
+
+## Version v1.2.1
+*Sun, 03 Apr 2022 15:50:03 +0000*
+- Fixed phpstan errors
