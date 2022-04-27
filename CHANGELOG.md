@@ -54,3 +54,8 @@
 ## Version v1.2.1
 *Sun, 03 Apr 2022 15:50:03 +0000*
 - Fixed phpstan errors
+
+
+## Version v1.3.0
+*Wed, 27 Apr 2022 15:57:27 +0000*
+- ready for symfony 5.4 and 6.0
