@@ -1,8 +1,15 @@
 #!/usr/bin/env php
 <?php
 
-$version = "v1.3.0";
-$message = "ready for symfony 5.4 and 6.0";
+$version = "v3.0.0";
+$message = "runs only with symfony 5.4 and >6 und php8";
+
+echo("Running phpstan:\n");
+system("composer run-script phpstan", $res);
+if ($res>0) {
+  echo("\nError during execution phpstan. Releasing cannceled.\n");
+  return 1;
+}
 
 file_put_contents("CHANGELOG.md", "\n\n## Version " . $version, FILE_APPEND);
 file_put_contents("CHANGELOG.md", "\n*" . date("r") . "*", FILE_APPEND);

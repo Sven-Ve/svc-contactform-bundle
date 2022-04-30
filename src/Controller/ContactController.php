@@ -18,19 +18,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ContactController extends AbstractController
 {
 
-  private $enableCaptcha;
-  private $contactMail;
-  private $routeAfterSend;
-  private $translator;
-  private $copyToMe;
-
-  public function __construct($enableCaptcha, $contactMail, $routeAfterSend, $copyToMe, TranslatorInterface $translator)
+  public function __construct(private $enableCaptcha, private $contactMail, private $routeAfterSend, private $copyToMe, private TranslatorInterface $translator)
   {
-    $this->enableCaptcha = $enableCaptcha;
-    $this->routeAfterSend = $routeAfterSend;
-    $this->contactMail = $contactMail;
-    $this->translator = $translator;
-    $this->copyToMe = $copyToMe;
   }
 
 
@@ -43,6 +32,7 @@ class ContactController extends AbstractController
    */
   public function contactForm(Request $request, MailerHelper $mailHelper): Response
   {
+    $data = [];
     $data['email'] = '';
     $data['name'] = '';
     try {
@@ -62,7 +52,7 @@ class ContactController extends AbstractController
           }
         }
       }
-    } catch (Exception $e) {
+    } catch (Exception) {
     }
 
     $form = $this->createForm(ContactType::class, $data, [
@@ -102,10 +92,6 @@ class ContactController extends AbstractController
 
   /**
    * private function to translate content in namespace 'ContactformBundle'
-   *
-   * @param string $text
-   * @param array $placeholder
-   * @return string
    */
   private function t(string $text, array $placeholder = []): string
   {
