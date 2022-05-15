@@ -69,3 +69,8 @@
 ## Version v3.0.1
 *Sun, 15 May 2022 08:14:34 +0000*
 - format code
+
+
+## Version v3.0.2
+*Sun, 15 May 2022 08:16:10 +0000*
+- change render to renderForm

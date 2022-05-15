@@ -79,8 +79,8 @@ class ContactController extends AbstractController
       }
     }
 
-    return $this->render('@SvcContactform/contact/contact.html.twig', [
-      'form' => $form->createView(),
+    return $this->renderForm('@SvcContactform/contact/contact.html.twig', [
+      'form' => $form,
     ]);
   }
 
