@@ -19,7 +19,7 @@ class Configuration implements ConfigurationInterface
       ->booleanNode('enable_captcha')->defaultFalse()->info('Enable captcha for contact form?')->end()
       ->booleanNode('enable_copy_to_me')->defaultTrue()->info('Enable sending a copy of the contact request to me too?')->end()
     ->end();
-    return $treeBuilder;
-    }
 
+    return $treeBuilder;
+  }
 }

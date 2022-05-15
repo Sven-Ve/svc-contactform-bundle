@@ -11,24 +11,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Controller to create a contact form and send the mail
+ * Controller to create a contact form and send the mail.
  *
  * @author Sven Vetter <dev@sv-systems.com>
  */
 class ContactController extends AbstractController
 {
-
   public function __construct(private $enableCaptcha, private $contactMail, private $routeAfterSend, private $copyToMe, private TranslatorInterface $translator)
   {
   }
 
-
   /**
-   * display and handle the contactfrom
-   *
-   * @param Request $request
-   * @param MailerHelper $mailHelper
-   * @return Response
+   * display and handle the contactfrom.
    */
   public function contactForm(Request $request, MailerHelper $mailHelper): Response
   {
@@ -56,10 +50,9 @@ class ContactController extends AbstractController
     }
 
     $form = $this->createForm(ContactType::class, $data, [
-      'enableCaptcha' => $this->enableCaptcha, 'copyToMe' => $this->copyToMe
+      'enableCaptcha' => $this->enableCaptcha, 'copyToMe' => $this->copyToMe,
     ]);
     $form->handleRequest($request);
-
 
     if ($form->isSubmitted() && $form->isValid()) {
       $email = trim($form->get('email')->getData());
@@ -67,8 +60,8 @@ class ContactController extends AbstractController
       $content = trim($form->get('text')->getData());
       $subject = trim($form->get('subject')->getData());
 
-      $html = $this->renderView("@SvcContactform/contact/MT_contact.html.twig", ["content" => $content, "name" => $name, "email" => $email]);
-      $text = $this->renderView("@SvcContactform/contact/MT_contact.text.twig", ["content" => $content, "name" => $name, "email" => $email]);
+      $html = $this->renderView('@SvcContactform/contact/MT_contact.html.twig', ['content' => $content, 'name' => $name, 'email' => $email]);
+      $text = $this->renderView('@SvcContactform/contact/MT_contact.text.twig', ['content' => $content, 'name' => $name, 'email' => $email]);
 
       $options = [];
       $options['replyTo'] = $email;
@@ -77,21 +70,22 @@ class ContactController extends AbstractController
         $options['ccName'] = $name;
       }
 
-      if ($mailHelper->send($this->contactMail, $this->t("Contact form request") . ": " . $subject, $html, $text, $options)) {
-        $this->addFlash("success", $this->t("Contact request sent."));
+      if ($mailHelper->send($this->contactMail, $this->t('Contact form request') . ': ' . $subject, $html, $text, $options)) {
+        $this->addFlash('success', $this->t('Contact request sent.'));
+
         return $this->redirectToRoute($this->routeAfterSend);
       } else {
-        $this->addFlash("error", $this->t("Cannot send contact request, please try it again."));
+        $this->addFlash('error', $this->t('Cannot send contact request, please try it again.'));
       }
     }
 
     return $this->render('@SvcContactform/contact/contact.html.twig', [
-      'form' => $form->createView()
+      'form' => $form->createView(),
     ]);
   }
 
   /**
-   * private function to translate content in namespace 'ContactformBundle'
+   * private function to translate content in namespace 'ContactformBundle'.
    */
   private function t(string $text, array $placeholder = []): string
   {
