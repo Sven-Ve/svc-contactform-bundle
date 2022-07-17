@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-$version = "v3.0.2";
-$message = "change render to renderForm";
+$version = "4.0.0";
+$message = "build with Symfony 6.1 bundle features, runs only with symfony 6.1";
 
 echo("Running phpstan:\n");
 system("composer run-script phpstan", $res);

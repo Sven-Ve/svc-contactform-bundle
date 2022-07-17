@@ -8,14 +8,14 @@ use Svc\ContactformBundle\Tests\SvcContactformTestingKernel;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class ChangeMailControllerTest extends KernelTestCase
+class ContactControllerTest extends KernelTestCase
 {
 
   public function testOpenContactForm()
   {
     $kernel = new SvcContactformTestingKernel();
     $client = new KernelBrowser($kernel);
-    $client->request('GET', '/api/en/contact');
+    $client->request('GET', '/contactform/en/contact/');
     $this->assertSame(200, $client->getResponse()->getStatusCode());
   }
 
@@ -23,7 +23,7 @@ class ChangeMailControllerTest extends KernelTestCase
   {
     $kernel = new SvcContactformTestingKernel();
     $client = new KernelBrowser($kernel);
-    $client->request('GET', '/api/en/contact');
+    $client->request('GET', '/contactform/en/contact/');
     $this->assertStringContainsString("Contact", $client->getResponse()->getContent());
   }
 
@@ -31,7 +31,7 @@ class ChangeMailControllerTest extends KernelTestCase
   {
     $kernel = new SvcContactformTestingKernel();
     $client = new KernelBrowser($kernel);
-    $client->request('GET', '/api/de/contact');
+    $client->request('GET', '/contactform/de/contact/');
     $this->assertStringContainsString("Kontakt", $client->getResponse()->getContent());
   }
 }

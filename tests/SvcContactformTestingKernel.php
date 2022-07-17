@@ -64,6 +64,7 @@ class SvcContactformTestingKernel extends Kernel
         'framework',
         [
           'secret' => 'foo',
+          'http_method_override' => false,
           'router' => [
             'resource' => 'kernel::loadRoutes',
             'type' => 'service',
@@ -71,7 +72,7 @@ class SvcContactformTestingKernel extends Kernel
           ],
         ]
       );
-      
+
       $container->register(AppKernel::class)
       ->setAutoconfigured(true)
       ->setAutowired(true);
@@ -91,7 +92,7 @@ class SvcContactformTestingKernel extends Kernel
    */
   protected function configureRoutes(RoutingConfigurator $routes)
   {
-    $routes->import(__DIR__ . '/../src/Resources/config/routes.xml')->prefix('/api/{_locale}');
+    $routes->import(__DIR__ . '/../config/routes.yaml')->prefix('/contactform/{_locale}');
   }
 
   protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)

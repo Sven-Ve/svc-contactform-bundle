@@ -34,6 +34,6 @@ in the `config/bundles.php` file of your project:
 
 return [
     // ...
-    Svc\UtilBundle\SvcContactformBundle::class => ['all' => true],
+    Svc\ContactformBundle\SvcContactformBundle::class => ['all' => true],
 ];
 ```

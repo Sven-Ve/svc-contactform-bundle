@@ -74,3 +74,8 @@
 ## Version v3.0.2
 *Sun, 15 May 2022 08:16:10 +0000*
 - change render to renderForm
+
+
+## Version 4.0.0
+*Sun, 17 Jul 2022 19:20:38 +0000*
+- build with Symfony 6.1 bundle features, runs only with symfony 6.1

@@ -1,0 +1,3 @@
+svc_contact_form:
+  path: /contact/
+  controller: Svc\ContactformBundle\Controller\ContactController::contactForm
