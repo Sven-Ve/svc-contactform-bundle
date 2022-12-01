@@ -84,3 +84,8 @@
 ## Version 4.0.1
 *Thu, 21 Jul 2022 18:38:13 +0000*
 - licence year update
+
+
+## Version 4.1.0
+*Thu, 01 Dec 2022 21:13:12 +0000*
+- tested for symfony 6.2

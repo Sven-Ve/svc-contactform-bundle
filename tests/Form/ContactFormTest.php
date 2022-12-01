@@ -11,7 +11,7 @@ class ContactFormTest extends TypeTestCase
   /**
    * @test
    */
-  public function testFormIsSubmitedSuccessfully()
+  public function testFormIsSubmittedSuccessfully()
   {
 
     $form = $this->factory->create(ContactType::class, null);

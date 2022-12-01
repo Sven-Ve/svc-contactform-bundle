@@ -1,13 +1,13 @@
 #!/usr/bin/env php
 <?php
 
-$version = "4.0.1";
-$message = "licence year update";
+$version = "4.1.0";
+$message = "tested for symfony 6.2";
 
 echo("Running phpstan:\n");
 system("composer run-script phpstan", $res);
 if ($res>0) {
-  echo("\nError during execution phpstan. Releasing cannceled.\n");
+  echo("\nError during execution phpstan. Releasing canceled.\n");
   return 1;
 }
 
