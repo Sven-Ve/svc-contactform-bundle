@@ -10,14 +10,14 @@
         }
     ],
     "require": {
-        "php": "^8",
-        "symfony/framework-bundle": "^6.1",
-        "symfony/options-resolver": "^6.1",
-        "svc/util-bundle": "^4|dev-main",
-        "symfony/translation": "^6.1",
-        "symfony/twig-bundle": "^6.1",
-        "symfony/form": "^6.1",
-        "symfony/yaml": "^6.1"
+        "php": "^8.2",
+        "symfony/framework-bundle": "^6.3|^7",
+        "symfony/options-resolver": "^6.3|^7",
+        "svc/util-bundle": "^5|dev-main",
+        "symfony/translation": "^6.3|^7",
+        "symfony/twig-bundle": "^6.3|^7",
+        "symfony/form": "^6.3|^7",
+        "symfony/yaml": "^6.3|^7"
     },
     "autoload": {
         "psr-4": {
@@ -30,9 +30,9 @@
         }
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^6.1",
-        "symfony/browser-kit": "^6.1",
-        "phpstan/phpstan": "^1.7"
+        "symfony/phpunit-bridge": "^6.3|^7",
+        "symfony/browser-kit": "^6.3|^7",
+        "phpstan/phpstan": "^1.10"
     },
     "suggest": {
         "excelwebzone/recaptcha-bundle": "Could by used in the contact form",
