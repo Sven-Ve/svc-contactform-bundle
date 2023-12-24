@@ -99,3 +99,8 @@
 ## Version 5.0.1
 *Sun, 17 Dec 2023 18:16:35 +0000*
 - ready for symfony 6.4 and 7 - fixed tests
+
+
+## Version 5.1.0
+*Sun, 24 Dec 2023 20:56:18 +0000*
+- switch to karser/karser-recaptcha3-bundle

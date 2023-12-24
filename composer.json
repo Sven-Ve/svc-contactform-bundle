@@ -35,7 +35,7 @@
         "phpstan/phpstan": "^1.10"
     },
     "suggest": {
-        "excelwebzone/recaptcha-bundle": "Could by used in the contact form",
+        "karser/karser-recaptcha3-bundle": "Could by used in the contact form",
         "twbs/bootstrap": "Twitter Bootstrap provides the CSS - use this bundle or other installation like yarn"
     },
     "scripts": {
