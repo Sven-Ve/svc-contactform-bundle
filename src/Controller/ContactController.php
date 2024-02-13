@@ -2,7 +2,6 @@
 
 namespace Svc\ContactformBundle\Controller;
 
-use Exception;
 use Svc\ContactformBundle\Form\ContactType;
 use Svc\UtilBundle\Service\MailerHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,7 +45,7 @@ class ContactController extends AbstractController
           }
         }
       }
-    } catch (Exception) {
+    } catch (\Exception) {
     }
 
     $form = $this->createForm(ContactType::class, $data, [

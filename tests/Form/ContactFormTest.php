@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Svc\ContactformBundle\Tests\Form;
 
 use Svc\ContactformBundle\Form\ContactType;
@@ -8,18 +7,14 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 class ContactFormTest extends TypeTestCase
 {
-  /**
-   * @test
-   */
   public function testFormIsSubmittedSuccessfully()
   {
-
     $form = $this->factory->create(ContactType::class, null);
 
-    $formData = array(
+    $formData = [
       'email' => 'test@test.com',
       'text' => 'This is only a test.',
-    );
+    ];
     $form->submit($formData);
 
     $this->assertTrue($form->isSynchronized());
@@ -28,17 +23,13 @@ class ContactFormTest extends TypeTestCase
     $this->assertNull($form->getData()['subject']);
   }
 
-  /**
-   * @test
-   */
   public function testFormCopyToMe()
   {
-
     $form = $this->factory->create(ContactType::class, null, ['copyToMe' => true]);
 
-    $formData = array(
+    $formData = [
       'copyToMe' => true,
-    );
+    ];
     $form->submit($formData);
 
     $this->assertTrue($form->isSynchronized());

@@ -2,35 +2,37 @@
 
 namespace Svc\ContactformBundle\Tests;
 
-require_once(__dir__ . "/Dummy/AppKernelDummy.php");
+require_once __DIR__ . '/Dummy/AppKernelDummy.php';
 
 use App\Kernel as AppKernel;
-use Symfony\Component\HttpKernel\Kernel;
 use Svc\ContactformBundle\SvcContactformBundle;
 use Svc\UtilBundle\SvcUtilBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Bundle\TwigBundle\TwigBundle;
 
 /**
- * Test kernel
+ * Test kernel.
  */
 class SvcContactformTestingKernel extends Kernel
 {
   use MicroKernelTrait;
 
   private $builder;
+
   private $routes;
+
   private $extraBundles;
 
   /**
    * @param array             $routes  Routes to be added to the container e.g. ['name' => 'path']
    * @param BundleInterface[] $bundles Additional bundles to be registered e.g. [new Bundle()]
    */
-  public function __construct(ContainerBuilder $builder = null, array $routes = [], array $bundles = [])
+  public function __construct(?ContainerBuilder $builder = null, array $routes = [], array $bundles = [])
   {
     $this->builder = $builder;
     $this->routes = $routes;
@@ -45,7 +47,7 @@ class SvcContactformTestingKernel extends Kernel
       new SvcContactformBundle(),
       new FrameworkBundle(),
       new TwigBundle(),
-      new SvcUtilBundle()
+      new SvcUtilBundle(),
     ];
   }
 
@@ -85,9 +87,8 @@ class SvcContactformTestingKernel extends Kernel
   }
 
   /**
-   * load bundle routes
+   * load bundle routes.
    *
-   * @param RoutingConfigurator $routes
    * @return void
    */
   protected function configureRoutes(RoutingConfigurator $routes)

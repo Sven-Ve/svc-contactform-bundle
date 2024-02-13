@@ -25,7 +25,7 @@ class ContactType extends AbstractType
           'attr' => ['placeholder' => 'Firstname Lastname'],
         ])
         ->add('email', EmailType::class, ['label' => 'Your mail'])
-      ;
+    ;
 
     if ($options['copyToMe']) {
       $builder->add('copyToMe', CheckboxType::class, [
@@ -43,7 +43,7 @@ class ContactType extends AbstractType
 
     $builder
         ->add('Send', SubmitType::class, ['attr' => ['class' => 'btn btn-lg btn-primary btn-block']])
-      ;
+    ;
   }
 
   public function configureOptions(OptionsResolver $resolver): void

@@ -3,10 +3,9 @@
 namespace App;
 
 /**
- * Test kernel
+ * Test kernel.
  */
 class Kernel
 {
-
-  const VERSION = "Testing";
+  public const VERSION = 'Testing';
 }

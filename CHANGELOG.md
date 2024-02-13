@@ -104,3 +104,8 @@
 ## Version 5.1.0
 *Sun, 24 Dec 2023 20:56:18 +0000*
 - switch to karser/karser-recaptcha3-bundle
+
+
+## Version 5.1.1
+*Tue, 13 Feb 2024 20:19:16 +0000*
+- switch to phpunit 11

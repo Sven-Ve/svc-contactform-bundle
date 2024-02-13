@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class ContactControllerTest extends KernelTestCase
 {
-
   public function testOpenContactForm()
   {
     $kernel = new SvcContactformTestingKernel();
@@ -24,7 +23,7 @@ class ContactControllerTest extends KernelTestCase
     $kernel = new SvcContactformTestingKernel();
     $client = new KernelBrowser($kernel);
     $client->request('GET', '/contactform/en/contact/');
-    $this->assertStringContainsString("Contact", $client->getResponse()->getContent());
+    $this->assertStringContainsString('Contact', $client->getResponse()->getContent());
   }
 
   public function testContactFormContentDE()
@@ -32,6 +31,6 @@ class ContactControllerTest extends KernelTestCase
     $kernel = new SvcContactformTestingKernel();
     $client = new KernelBrowser($kernel);
     $client->request('GET', '/contactform/de/contact/');
-    $this->assertStringContainsString("Kontakt", $client->getResponse()->getContent());
+    $this->assertStringContainsString('Kontakt', $client->getResponse()->getContent());
   }
 }

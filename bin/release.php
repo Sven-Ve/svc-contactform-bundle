@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-$version = "5.1.0";
-$message = "switch to karser/karser-recaptcha3-bundle";
+$version = "5.1.1";
+$message = "switch to phpunit 11";
 
 echo("Running phpstan:\n");
 system("composer run-script phpstan", $res);
