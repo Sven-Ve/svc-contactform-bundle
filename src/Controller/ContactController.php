@@ -16,7 +16,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ContactController extends AbstractController
 {
-  public function __construct(private $enableCaptcha, private $contactMail, private $routeAfterSend, private $copyToMe, private TranslatorInterface $translator)
+  public function __construct(
+    private bool $enableCaptcha, 
+    private string $contactMail, 
+    private string $routeAfterSend, 
+    private bool $copyToMe, 
+    private TranslatorInterface $translator)
   {
   }
 
@@ -85,6 +90,12 @@ class ContactController extends AbstractController
 
   /**
    * private function to translate content in namespace 'ContactformBundle'.
+   */
+
+  /**
+   * private function to translate content in namespace 'ContactformBundle'.
+   *
+   * @param array<mixed> $placeholder
    */
   private function t(string $text, array $placeholder = []): string
   {

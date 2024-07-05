@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-$version = "5.1.1";
-$message = "switch to phpunit 11";
+$version = "5.2.0";
+$message = "better testing kernel, phpstan now on level 8";
 
 echo("Running phpstan:\n");
 system("composer run-script phpstan", $res);

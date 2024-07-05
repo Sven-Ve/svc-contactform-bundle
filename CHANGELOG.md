@@ -109,3 +109,8 @@
 ## Version 5.1.1
 *Tue, 13 Feb 2024 20:19:16 +0000*
 - switch to phpunit 11
+
+
+## Version 5.2.0
+*Fri, 05 Jul 2024 19:54:31 +0000*
+- better testing kernel, phpstan now on level 8
