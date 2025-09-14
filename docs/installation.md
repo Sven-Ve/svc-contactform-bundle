@@ -37,3 +37,16 @@ return [
     Svc\ContactformBundle\SvcContactformBundle::class => ['all' => true],
 ];
 ```
+
+## Import Routes (Required from v5.3.0+)
+
+Since version 5.3.0, routes must be manually imported. Create a route configuration file:
+
+```yaml
+# config/routes/svc_contactform.yaml
+_svc_contactform:
+    resource: '@SvcContactformBundle/config/routes.php'
+    prefix: /svc-contactform/{_locale}  # Optional: add locale support
+```
+
+**Note:** The `{_locale}` parameter is optional and only needed if you want multilingual support.

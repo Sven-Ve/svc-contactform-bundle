@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Symfony Bundle (`svc/contactform-bundle`) that provides a contact form with email functionality. It's a standard Symfony bundle using the new Bundle Configuration System (requires Symfony >=6.1).
+This is a Symfony Bundle (`svc/contactform-bundle`) that provides a contact form with email functionality. It uses the new Bundle Configuration System (requires Symfony >=6.1) and has migrated from YAML to PHP-based configuration.
+
+**Important**: Version 5.3.0+ uses PHP configuration files instead of YAML. Routes must be manually imported in consuming applications.
 
 ## Commands
 
@@ -12,6 +14,12 @@ This is a Symfony Bundle (`svc/contactform-bundle`) that provides a contact form
 ```bash
 composer test           # Run PHPUnit tests with testdox output
 vendor/bin/phpunit      # Direct PHPUnit execution
+vendor/bin/phpunit --testdox tests/SpecificTest.php  # Run single test file
+```
+
+### Release
+```bash
+bin/release.php         # Automated release process (runs tests, phpstan, creates git tag)
 ```
 
 ### Static Analysis
@@ -34,6 +42,17 @@ vendor/bin/phpstan analyse -c .phpstan.neon  # Direct PHPStan execution
 - **Testing Kernel**: `tests/SvcContactformTestingKernel.php` - Custom kernel for testing
 
 ### Configuration
+
+**Route Configuration (Breaking Change in 5.3.0)**:
+Routes are now defined in PHP (`config/routes.php`) and must be manually imported:
+```yaml
+# config/routes/svc_contactform.yaml
+_svc_contactform:
+    resource: '@SvcContactformBundle/config/routes.php'
+    prefix: /svc-contactform/{_locale}  # Optional: add locale support
+```
+
+**Bundle Configuration**:
 The bundle supports these configuration options (defined in `SvcContactformBundle.php:configure()`):
 - `contact_mail`: Email address for receiving contact forms
 - `route_after_send`: Route to redirect to after successful submission

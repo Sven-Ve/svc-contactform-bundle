@@ -1,35 +1,36 @@
 # Usage
 
-## Route
-adapt the default url prefix in config/routes/svc_contactform.yaml and enable translation (if you like it)
+## Route Configuration
+
+**Important:** Since version 5.3.0, routes must be manually imported in your application.
+
+Create the route configuration file:
 
 ```yaml
 # config/routes/svc_contactform.yaml
 _svc_contactform:
     resource: '@SvcContactformBundle/config/routes.php'
-    prefix: /svc-contactform/{_locale}
+    prefix: /svc-contactform/{_locale}  # Optional: add locale support
 ```
 
-## Config
+## Bundle Configuration
 
-* Configure in /config/packages/svc_contactform.yaml
-  * enable captcha (if installed and configured), default = false
-  * send mail address
-  * define a route for redirecting after send the mail
-
+Configure the bundle in your configuration file:
 
 ```yaml
 # config/packages/svc_contactform.yaml
 svc_contactform:
-    contact_form:
-        # Enable captcha for contact form?
-        enable_captcha:      false
-        # Enable sending a copy of the contact request to me too?
-        enable_copy_to_me:  true
-        # Email adress for contact mails
-        contact_mail:       test@test.com
-        # Which route should by called after mail sent
-        route_after_send:   index
+    # Email address for contact mails (required)
+    contact_mail: test@test.com
+
+    # Route to redirect to after successful submission (required)
+    route_after_send: index
+
+    # Enable captcha for contact form (optional, default: false)
+    enable_captcha: false
+
+    # Enable sending a copy of the contact request to sender (optional, default: true)
+    enable_copy_to_me: true
 ```
 
 ## CSS
