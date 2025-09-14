@@ -119,3 +119,8 @@
 ## Version 5.3.0
 *Sun, 14 Sep 2025 09:50:14 +0000*
 - breaking change, now it use php as route configuration. You have to import the routes in your project manually. See docs for more information.
+
+
+## Version 5.3.1
+*Sun, 14 Sep 2025 14:38:17 +0000*
+- Fix translation for contact form heading in Twig template

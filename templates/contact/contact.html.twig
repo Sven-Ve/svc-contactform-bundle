@@ -8,10 +8,9 @@
 {% block body %}
 	{% trans_default_domain 'ContactformBundle' %}
 	<main class='svc-contactform' role='main'>
-		<h2>{% trans %}Contact{% endtrans %}</h2>
 
 		<section aria-labelledby="contact-form-heading">
-			<h2 id="contact-form-heading" class="sr-only">Contact Form</h2>
+			<h2 id="contact-form-heading" class="sr-only">{% trans %}Contact{% endtrans %}</h2>
 			{{ form(form, {'attr': {'novalidate': 'novalidate', 'aria-label': 'Contact form'}}) }}
 		</section>
 	</main>
