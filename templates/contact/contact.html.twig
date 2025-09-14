@@ -7,10 +7,12 @@
 
 {% block body %}
 	{% trans_default_domain 'ContactformBundle' %}
-	<div class='svc-contactform'>
-		<h3>{% trans %}Contact{% endtrans %}</h3>
+	<main class='svc-contactform' role='main'>
+		<h2>{% trans %}Contact{% endtrans %}</h2>
 
-		{{ form(form) }}
-		</div>
-
-	{% endblock %}
+		<section aria-labelledby="contact-form-heading">
+			<h2 id="contact-form-heading" class="sr-only">Contact Form</h2>
+			{{ form(form, {'attr': {'novalidate': 'novalidate', 'aria-label': 'Contact form'}}) }}
+		</section>
+	</main>
+{% endblock %}

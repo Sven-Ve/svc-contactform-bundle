@@ -42,6 +42,9 @@ class SvcContactformTestingKernel extends Kernel
             'http_method_override' => false,
             'secret' => 'foo-secret',
             'test' => true,
+            'validation' => [
+                'enabled' => true,
+            ],
         ];
 
         $container->loadFromExtension('framework', $config);

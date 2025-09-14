@@ -12,6 +12,7 @@
 namespace Svc\ContactformBundle\Controller;
 
 use Svc\ContactformBundle\Form\ContactType;
+use Svc\ContactformBundle\Service\UserDataExtractor;
 use Svc\UtilBundle\Service\MailerHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +32,7 @@ class ContactController extends AbstractController
         private string $routeAfterSend,
         private bool $copyToMe,
         private TranslatorInterface $translator,
+        private UserDataExtractor $userDataExtractor,
     ) {
     }
 
@@ -39,28 +41,14 @@ class ContactController extends AbstractController
      */
     public function contactForm(Request $request, MailerHelper $mailHelper): Response
     {
-        $data = [];
-        $data['email'] = '';
-        $data['name'] = '';
+        // Extract user data for pre-filling the form
+        $user = null;
         try {
             $user = $this->getUser();
-            if ($user) {
-                if (method_exists($user, 'getEmail')) {
-                    $data['email'] = $user->getEmail();
-                }
-                if (method_exists($user, 'getNickname')) {
-                    $data['name'] = $user->getNickname();
-                } else {
-                    if (method_exists($user, 'getFirstname')) {
-                        $data['name'] = $user->getFirstname();
-                    }
-                    if (method_exists($user, 'getLastname')) {
-                        $data['name'] .= ' ' . $user->getLastname();
-                    }
-                }
-            }
         } catch (\Exception) {
+            // Security context not available (e.g., in test environment)
         }
+        $data = $this->userDataExtractor->extractUserData($user);
 
         $form = $this->createForm(ContactType::class, $data, [
             'enableCaptcha' => $this->enableCaptcha, 'copyToMe' => $this->copyToMe,
@@ -73,8 +61,33 @@ class ContactController extends AbstractController
             $content = trim($form->get('text')->getData());
             $subject = trim($form->get('subject')->getData());
 
-            $html = $this->renderView('@SvcContactform/contact/MT_contact.html.twig', ['content' => $content, 'name' => $name, 'email' => $email]);
-            $text = $this->renderView('@SvcContactform/contact/MT_contact.text.twig', ['content' => $content, 'name' => $name, 'email' => $email]);
+            // Validate that required fields are not empty after trimming
+            if (empty($email) || empty($name) || empty($content) || empty($subject)) {
+                $this->addFlash('error', $this->t('All fields are required.'));
+
+                return $this->render('@SvcContactform/contact/contact.html.twig', [
+                    'form' => $form,
+                ]);
+            }
+
+            // Sanitize email to prevent header injection
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $this->addFlash('error', $this->t('Please provide a valid email address.'));
+
+                return $this->render('@SvcContactform/contact/contact.html.twig', [
+                    'form' => $form,
+                ]);
+            }
+
+            // Sanitize subject to prevent header injection
+            $subject = preg_replace('/[\r\n\t]/', '', $subject);
+
+            // Prepare template variables
+            $templateVars = ['content' => $content, 'name' => $name, 'email' => $email];
+
+            // Render templates only when actually needed
+            $html = $this->renderView('@SvcContactform/contact/MT_contact.html.twig', $templateVars);
+            $text = $this->renderView('@SvcContactform/contact/MT_contact.text.twig', $templateVars);
 
             $options = [];
             $options['replyTo'] = $email;
@@ -96,10 +109,6 @@ class ContactController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    /**
-     * private function to translate content in namespace 'ContactformBundle'.
-     */
 
     /**
      * private function to translate content in namespace 'ContactformBundle'.

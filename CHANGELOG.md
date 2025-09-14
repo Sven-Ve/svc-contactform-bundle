@@ -114,3 +114,8 @@
 ## Version 5.2.0
 *Fri, 05 Jul 2024 19:54:31 +0000*
 - better testing kernel, phpstan now on level 8
+
+
+## Version 5.3.0
+*Sun, 14 Sep 2025 09:50:14 +0000*
+- breaking change, now it use php as route configuration. You have to import the routes in your project manually. See docs for more information.

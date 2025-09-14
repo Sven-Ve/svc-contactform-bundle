@@ -8,4 +8,3 @@ parameters:
     - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition.*#'
     - '#Class Karser\\Recaptcha3Bundle\\.* not found.#'
     - '#Instantiated class Karser\\Recaptcha3Bundle\\.* not found.#'
-    - '#Call to method get.* on an unknown class Symfony\\Component\\Security\\Core\\User\\UserInterface.*#'

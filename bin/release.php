@@ -10,8 +10,8 @@
  * file that was distributed with this source code.
  */
 
-$version = '5.2.0';
-$message = 'better testing kernel, phpstan now on level 8';
+$version = '5.3.0';
+$message = 'breaking change, now it use php as route configuration. You have to import the routes in your project manually. See docs for more information.';
 
 echo "Running phpstan:\n";
 system('composer run-script phpstan', $res);
