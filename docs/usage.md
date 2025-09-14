@@ -6,7 +6,7 @@ adapt the default url prefix in config/routes/svc_contactform.yaml and enable tr
 ```yaml
 # config/routes/svc_contactform.yaml
 _svc_contactform:
-    resource: '@SvcContactformBundle/config/routes.yaml'
+    resource: '@SvcContactformBundle/config/routes.php'
     prefix: /svc-contactform/{_locale}
 ```
 

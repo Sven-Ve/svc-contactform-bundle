@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the svc/contactform-bundle.
+ *
+ * (c) 2025 Sven Vetter <dev@sv-systems.com>.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Svc\ContactformBundle\Controller;
 
 use Svc\ContactformBundle\Form\ContactType;
@@ -16,89 +25,89 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ContactController extends AbstractController
 {
-  public function __construct(
-    private bool $enableCaptcha, 
-    private string $contactMail, 
-    private string $routeAfterSend, 
-    private bool $copyToMe, 
-    private TranslatorInterface $translator)
-  {
-  }
-
-  /**
-   * display and handle the contactfrom.
-   */
-  public function contactForm(Request $request, MailerHelper $mailHelper): Response
-  {
-    $data = [];
-    $data['email'] = '';
-    $data['name'] = '';
-    try {
-      $user = $this->getUser();
-      if ($user) {
-        if (method_exists($user, 'getEmail')) {
-          $data['email'] = $user->getEmail();
-        }
-        if (method_exists($user, 'getNickname')) {
-          $data['name'] = $user->getNickname();
-        } else {
-          if (method_exists($user, 'getFirstname')) {
-            $data['name'] = $user->getFirstname();
-          }
-          if (method_exists($user, 'getLastname')) {
-            $data['name'] .= ' ' . $user->getLastname();
-          }
-        }
-      }
-    } catch (\Exception) {
+    public function __construct(
+        private bool $enableCaptcha,
+        private string $contactMail,
+        private string $routeAfterSend,
+        private bool $copyToMe,
+        private TranslatorInterface $translator,
+    ) {
     }
 
-    $form = $this->createForm(ContactType::class, $data, [
-      'enableCaptcha' => $this->enableCaptcha, 'copyToMe' => $this->copyToMe,
-    ]);
-    $form->handleRequest($request);
+    /**
+     * display and handle the contactfrom.
+     */
+    public function contactForm(Request $request, MailerHelper $mailHelper): Response
+    {
+        $data = [];
+        $data['email'] = '';
+        $data['name'] = '';
+        try {
+            $user = $this->getUser();
+            if ($user) {
+                if (method_exists($user, 'getEmail')) {
+                    $data['email'] = $user->getEmail();
+                }
+                if (method_exists($user, 'getNickname')) {
+                    $data['name'] = $user->getNickname();
+                } else {
+                    if (method_exists($user, 'getFirstname')) {
+                        $data['name'] = $user->getFirstname();
+                    }
+                    if (method_exists($user, 'getLastname')) {
+                        $data['name'] .= ' ' . $user->getLastname();
+                    }
+                }
+            }
+        } catch (\Exception) {
+        }
 
-    if ($form->isSubmitted() && $form->isValid()) {
-      $email = trim($form->get('email')->getData());
-      $name = trim($form->get('name')->getData());
-      $content = trim($form->get('text')->getData());
-      $subject = trim($form->get('subject')->getData());
+        $form = $this->createForm(ContactType::class, $data, [
+            'enableCaptcha' => $this->enableCaptcha, 'copyToMe' => $this->copyToMe,
+        ]);
+        $form->handleRequest($request);
 
-      $html = $this->renderView('@SvcContactform/contact/MT_contact.html.twig', ['content' => $content, 'name' => $name, 'email' => $email]);
-      $text = $this->renderView('@SvcContactform/contact/MT_contact.text.twig', ['content' => $content, 'name' => $name, 'email' => $email]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $email = trim($form->get('email')->getData());
+            $name = trim($form->get('name')->getData());
+            $content = trim($form->get('text')->getData());
+            $subject = trim($form->get('subject')->getData());
 
-      $options = [];
-      $options['replyTo'] = $email;
-      if ($this->copyToMe and $form->get('copyToMe')->getData()) {
-        $options['cc'] = $email;
-        $options['ccName'] = $name;
-      }
+            $html = $this->renderView('@SvcContactform/contact/MT_contact.html.twig', ['content' => $content, 'name' => $name, 'email' => $email]);
+            $text = $this->renderView('@SvcContactform/contact/MT_contact.text.twig', ['content' => $content, 'name' => $name, 'email' => $email]);
 
-      if ($mailHelper->send($this->contactMail, $this->t('Contact form request') . ': ' . $subject, $html, $text, $options)) {
-        $this->addFlash('success', $this->t('Contact request sent.'));
+            $options = [];
+            $options['replyTo'] = $email;
+            if ($this->copyToMe and $form->get('copyToMe')->getData()) {
+                $options['cc'] = $email;
+                $options['ccName'] = $name;
+            }
 
-        return $this->redirectToRoute($this->routeAfterSend);
-      } else {
-        $this->addFlash('error', $this->t('Cannot send contact request, please try it again.'));
-      }
+            if ($mailHelper->send($this->contactMail, $this->t('Contact form request') . ': ' . $subject, $html, $text, $options)) {
+                $this->addFlash('success', $this->t('Contact request sent.'));
+
+                return $this->redirectToRoute($this->routeAfterSend);
+            }
+            $this->addFlash('error', $this->t('Cannot send contact request, please try it again.'));
+
+        }
+
+        return $this->render('@SvcContactform/contact/contact.html.twig', [
+            'form' => $form,
+        ]);
     }
 
-    return $this->render('@SvcContactform/contact/contact.html.twig', [
-      'form' => $form,
-    ]);
-  }
+    /**
+     * private function to translate content in namespace 'ContactformBundle'.
+     */
 
-  /**
-   * private function to translate content in namespace 'ContactformBundle'.
-   */
-
-  /**
-   * private function to translate content in namespace 'ContactformBundle'.
-   *
-   * @param array<mixed> $placeholder
-   */
-  private function t(string $text, array $placeholder = []): string
-  {
-    return $this->translator->trans($text, $placeholder, 'ContactformBundle');
-  }
+    /**
+     * private function to translate content in namespace 'ContactformBundle'.
+     *
+     * @param array<mixed> $placeholder
+     */
+    private function t(string $text, array $placeholder = []): string
+    {
+        return $this->translator->trans($text, $placeholder, 'ContactformBundle');
+    }
 }

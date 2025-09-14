@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the svc/contactform-bundle.
+ *
+ * (c) 2025 Sven Vetter <dev@sv-systems.com>.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Svc\ContactformBundle\Form;
 
 use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
@@ -15,43 +24,43 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactType extends AbstractType
 {
-  public function buildForm(FormBuilderInterface $builder, array $options): void
-  {
-    $builder
-        ->add('subject', TextType::class, ['label' => 'Subject', 'attr' => ['autofocus' => true]])
-        ->add('text', TextareaType::class, ['label' => 'Your message', 'attr' => ['rows' => 6]])
-        ->add('name', TextType::class, [
-          'label' => 'Your name',
-          'attr' => ['placeholder' => 'Firstname Lastname'],
-        ])
-        ->add('email', EmailType::class, ['label' => 'Your mail'])
-    ;
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('subject', TextType::class, ['label' => 'Subject', 'attr' => ['autofocus' => true]])
+            ->add('text', TextareaType::class, ['label' => 'Your message', 'attr' => ['rows' => 6]])
+            ->add('name', TextType::class, [
+                'label' => 'Your name',
+                'attr' => ['placeholder' => 'Firstname Lastname'],
+            ])
+            ->add('email', EmailType::class, ['label' => 'Your mail'])
+        ;
 
-    if ($options['copyToMe']) {
-      $builder->add('copyToMe', CheckboxType::class, [
-        'help' => 'If checked, send a copy of this request to me',
-        'required' => false,
-      ]);
+        if ($options['copyToMe']) {
+            $builder->add('copyToMe', CheckboxType::class, [
+                'help' => 'If checked, send a copy of this request to me',
+                'required' => false,
+            ]);
+        }
+
+        if ($options['enableCaptcha']) {
+            $builder->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'homepage',
+            ]);
+        }
+
+        $builder
+            ->add('Send', SubmitType::class, ['attr' => ['class' => 'btn btn-lg btn-primary btn-block']])
+        ;
     }
 
-    if ($options['enableCaptcha']) {
-      $builder->add('captcha', Recaptcha3Type::class, [
-        'constraints' => new Recaptcha3(),
-        'action_name' => 'homepage',
-      ]);
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'enableCaptcha' => null,
+            'copyToMe' => null,
+            'translation_domain' => 'ContactformBundle',
+        ]);
     }
-
-    $builder
-        ->add('Send', SubmitType::class, ['attr' => ['class' => 'btn btn-lg btn-primary btn-block']])
-    ;
-  }
-
-  public function configureOptions(OptionsResolver $resolver): void
-  {
-    $resolver->setDefaults([
-      'enableCaptcha' => null,
-      'copyToMe' => null,
-      'translation_domain' => 'ContactformBundle',
-    ]);
-  }
 }
