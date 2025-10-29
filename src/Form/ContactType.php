@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the svc/contactform-bundle.
  *
@@ -43,13 +45,13 @@ class ContactType extends AbstractType
                 'help' => 'Please enter a brief subject for your message (5-200 characters)',
                 'help_attr' => ['id' => 'subject-help'],
                 'constraints' => [
-                    new NotBlank(['message' => 'Subject cannot be empty']),
-                    new Length([
-                        'min' => 5,
-                        'max' => 200,
-                        'minMessage' => 'Subject must be at least {{ limit }} characters long',
-                        'maxMessage' => 'Subject cannot be longer than {{ limit }} characters',
-                    ]),
+                    new NotBlank(message: 'Subject cannot be empty'),
+                    new Length(
+                        min: 5,
+                        max: 200,
+                        minMessage: 'Subject must be at least {{ limit }} characters long',
+                        maxMessage: 'Subject cannot be longer than {{ limit }} characters',
+                    ),
                 ],
             ])
             ->add('text', TextareaType::class, [
@@ -65,13 +67,13 @@ class ContactType extends AbstractType
                 'help' => 'Please enter your detailed message (10-2000 characters)',
                 'help_attr' => ['id' => 'message-help'],
                 'constraints' => [
-                    new NotBlank(['message' => 'Message cannot be empty']),
-                    new Length([
-                        'min' => 10,
-                        'max' => 2000,
-                        'minMessage' => 'Message must be at least {{ limit }} characters long',
-                        'maxMessage' => 'Message cannot be longer than {{ limit }} characters',
-                    ]),
+                    new NotBlank(message: 'Message cannot be empty'),
+                    new Length(
+                        min: 10,
+                        max: 2000,
+                        minMessage: 'Message must be at least {{ limit }} characters long',
+                        maxMessage: 'Message cannot be longer than {{ limit }} characters',
+                    ),
                 ],
             ])
             ->add('name', TextType::class, [
@@ -87,13 +89,13 @@ class ContactType extends AbstractType
                 'help' => 'Please enter your full name (5-70 characters)',
                 'help_attr' => ['id' => 'name-help'],
                 'constraints' => [
-                    new NotBlank(['message' => 'Name cannot be empty']),
-                    new Length([
-                        'min' => 5,
-                        'max' => 70,
-                        'minMessage' => 'Name must be at least {{ limit }} characters long',
-                        'maxMessage' => 'Name cannot be longer than {{ limit }} characters',
-                    ]),
+                    new NotBlank(message: 'Name cannot be empty'),
+                    new Length(
+                        min: 5,
+                        max: 70,
+                        minMessage: 'Name must be at least {{ limit }} characters long',
+                        maxMessage: 'Name cannot be longer than {{ limit }} characters',
+                    ),
                 ],
             ])
             ->add('email', EmailType::class, [
@@ -108,8 +110,8 @@ class ContactType extends AbstractType
                 'help' => 'Please enter a valid email address for replies',
                 'help_attr' => ['id' => 'email-help'],
                 'constraints' => [
-                    new NotBlank(['message' => 'Email cannot be empty']),
-                    new Email(['message' => 'Please provide a valid email address']),
+                    new NotBlank(message: 'Email cannot be empty'),
+                    new Email(message: 'Please provide a valid email address'),
                 ],
             ])
         ;

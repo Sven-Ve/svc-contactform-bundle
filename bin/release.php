@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the svc/contactform-bundle.
  *
@@ -10,8 +12,8 @@
  * file that was distributed with this source code.
  */
 
-$version = '5.3.1';
-$message = 'Fix translation for contact form heading in Twig template';
+$version = '5.3.2';
+$message = 'Update ContactType form constraints to use named arguments syntax for Symfony 7.3+, add strict types declaration.';
 
 echo "Running phpstan:\n";
 system('composer run-script phpstan', $res);

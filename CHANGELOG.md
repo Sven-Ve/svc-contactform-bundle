@@ -124,3 +124,8 @@
 ## Version 5.3.1
 *Sun, 14 Sep 2025 14:38:17 +0000*
 - Fix translation for contact form heading in Twig template
+
+
+## Version 5.3.2
+*Wed, 29 Oct 2025 20:39:14 +0000*
+- Update ContactType form constraints to use named arguments syntax for Symfony 7.3+, add strict types declaration.

@@ -70,3 +70,32 @@ Uses PHPUnit 12.3 with a custom testing kernel. Tests cover both the form and co
 
 ### Static Analysis
 PHPStan configured at level 8 with specific ignore patterns for Symfony and reCAPTCHA bundle classes that may not be available during static analysis.
+
+## Coding Standards
+
+### Symfony Constraints
+**Important**: Use named arguments syntax for all Symfony validator constraints (required for Symfony 7.3+):
+
+```php
+// ✅ Correct - Named arguments
+new NotBlank(message: 'Field cannot be empty')
+new Email(message: 'Invalid email address')
+new Length(
+    min: 5,
+    max: 200,
+    minMessage: 'Must be at least {{ limit }} characters',
+    maxMessage: 'Cannot exceed {{ limit }} characters'
+)
+
+// ❌ Deprecated - Array syntax (causes deprecation warnings)
+new NotBlank(['message' => 'Field cannot be empty'])
+new Email(['message' => 'Invalid email address'])
+new Length([
+    'min' => 5,
+    'max' => 200,
+    'minMessage' => 'Must be at least {{ limit }} characters',
+    'maxMessage' => 'Cannot exceed {{ limit }} characters',
+])
+```
+
+This applies to all constraints in `src/Form/ContactType.php` and any future form types.
