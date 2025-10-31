@@ -50,6 +50,13 @@ class SvcContactformTestingKernel extends Kernel
         ];
 
         $container->loadFromExtension('framework', $config);
+
+        $container->loadFromExtension('svc_contactform', [
+            'contact_mail' => 'test@example.com',
+            'route_after_send' => 'index',
+            'enable_captcha' => false,
+            'enable_copy_to_me' => true,
+        ]);
     }
 
     /**

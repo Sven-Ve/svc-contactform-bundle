@@ -12,8 +12,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$version = '5.3.2';
-$message = 'Update ContactType form constraints to use named arguments syntax for Symfony 7.3+, add strict types declaration.';
+$version = '5.4.0';
+$message = 'Update default values in the configuration; Enhance documentation and configuration examples for SvcContactformBundle: clarify required parameters, provide minimal and full configuration examples.';
 
 echo "Running phpstan:\n";
 system('composer run-script phpstan', $res);

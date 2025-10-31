@@ -118,7 +118,8 @@
 
 ## Version 5.3.0
 *Sun, 14 Sep 2025 09:50:14 +0000*
-- breaking change, now it use php as route configuration. You have to import the routes in your project manually. See docs for more information.
+- breaking change, now it use php as route configuration. 
+- You have to import the routes in your project manually. See docs for more information.
 
 
 ## Version 5.3.1
@@ -128,4 +129,10 @@
 
 ## Version 5.3.2
 *Wed, 29 Oct 2025 20:39:14 +0000*
-- Update ContactType form constraints to use named arguments syntax for Symfony 7.3+, add strict types declaration.
+- Update ContactType form constraints to use named arguments syntax for Symfony 7.3+
+- add strict types declaration.
+
+
+## Version 5.4.0
+*Fri, 31 Oct 2025 15:32:37 +0000*
+- Update default values in the configuration; Enhance documentation and configuration examples for SvcContactformBundle: clarify required parameters, provide minimal and full configuration examples.

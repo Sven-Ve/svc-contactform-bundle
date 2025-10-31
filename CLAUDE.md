@@ -54,10 +54,17 @@ _svc_contactform:
 
 **Bundle Configuration**:
 The bundle supports these configuration options (defined in `SvcContactformBundle.php:configure()`):
-- `contact_mail`: Email address for receiving contact forms
-- `route_after_send`: Route to redirect to after successful submission
-- `enable_captcha`: Enable/disable reCAPTCHA integration
-- `enable_copy_to_me`: Send copy of form to sender
+- `contact_mail`: **[REQUIRED]** Email address for receiving contact forms (e.g., 'contact@example.com')
+- `route_after_send`: Route to redirect to after successful submission (default: 'index')
+- `enable_captcha`: Enable/disable reCAPTCHA integration (default: false)
+- `enable_copy_to_me`: Send copy of form to sender (default: true)
+
+**Minimal Configuration Example**:
+```yaml
+# config/packages/svc_contactform.yaml
+svc_contactform:
+    contact_mail: contact@example.com  # Required!
+```
 
 ### Dependencies
 - Core: Symfony Framework Bundle, Form, Twig Bundle, Translation
