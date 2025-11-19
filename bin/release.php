@@ -12,8 +12,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$version = '5.4.0';
-$message = 'Update default values in the configuration; Enhance documentation and configuration examples for SvcContactformBundle: clarify required parameters, provide minimal and full configuration examples.';
+$version = '5.5.0';
+$message = 'Tested with svc-utilbundle 7.x too.';
 
 echo "Running phpstan:\n";
 system('composer run-script phpstan', $res);

@@ -136,3 +136,8 @@
 ## Version 5.4.0
 *Fri, 31 Oct 2025 15:32:37 +0000*
 - Update default values in the configuration; Enhance documentation and configuration examples for SvcContactformBundle: clarify required parameters, provide minimal and full configuration examples.
+
+
+## Version 5.5.0
+*Wed, 19 Nov 2025 15:28:42 +0000*
+- Tested with svc-utilbundle 7.x too.
