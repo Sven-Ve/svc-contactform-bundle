@@ -8,6 +8,7 @@
 :warning: **Attention:** <br/>
 From version 4.0 the bundle works only with Symfony >=6.1, because the new Bundle Configuration System is used.<br/>
 From version 5.3.0 routes are configured in PHP instead of YAML - **manual route import required**.<br/>
+From version 6.0.0 requires `svc/util-bundle` ^8.0.1 or higher.<br/>
 Please use version 3.x for older Symfony installations.
 
 ## Bundle for a contact form and sending the mail with contact info

@@ -43,6 +43,22 @@ class ContactController extends AbstractController
      */
     public function contactForm(Request $request, MailerHelper $mailHelper): Response
     {
+        return $this->handleContactForm($request, $mailHelper, '@SvcContactform/contact/contact.html.twig', false);
+    }
+
+    /**
+     * display and handle the contactform in a modal dialog.
+     */
+    public function contactFormModal(Request $request, MailerHelper $mailHelper): Response
+    {
+        return $this->handleContactForm($request, $mailHelper, '@SvcContactform/contact/contact_modal.html.twig', true);
+    }
+
+    /**
+     * Common handler for contact form processing.
+     */
+    private function handleContactForm(Request $request, MailerHelper $mailHelper, string $template, bool $isModal): Response
+    {
         // Extract user data for pre-filling the form
         $user = null;
         try {
@@ -67,7 +83,7 @@ class ContactController extends AbstractController
             if (empty($email) || empty($name) || empty($content) || empty($subject)) {
                 $this->addFlash('error', $this->t('All fields are required.'));
 
-                return $this->render('@SvcContactform/contact/contact.html.twig', [
+                return $this->render($template, [
                     'form' => $form,
                 ]);
             }
@@ -76,7 +92,7 @@ class ContactController extends AbstractController
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $this->addFlash('error', $this->t('Please provide a valid email address.'));
 
-                return $this->render('@SvcContactform/contact/contact.html.twig', [
+                return $this->render($template, [
                     'form' => $form,
                 ]);
             }
@@ -101,13 +117,28 @@ class ContactController extends AbstractController
             if ($mailHelper->send($this->contactMail, $this->t('Contact form request') . ': ' . $subject, $html, $text, $options)) {
                 $this->addFlash('success', $this->t('Contact request sent.'));
 
+                // For modal with Turbo, return a response that breaks out of the frame and redirects
+                if ($isModal) {
+                    $response = new Response(
+                        '<turbo-frame id="modal-contact-form">' .
+                        '<script type="text/javascript">' .
+                        'const dialog = document.querySelector("dialog[open]");' .
+                        'if (dialog) { dialog.close(); }' .
+                        'Turbo.visit("' . $this->generateUrl($this->routeAfterSend) . '");' .
+                        '</script>' .
+                        '</turbo-frame>'
+                    );
+
+                    return $response;
+                }
+
                 return $this->redirectToRoute($this->routeAfterSend);
             }
             $this->addFlash('error', $this->t('Cannot send contact request, please try it again.'));
 
         }
 
-        return $this->render('@SvcContactform/contact/contact.html.twig', [
+        return $this->render($template, [
             'form' => $form,
         ]);
     }

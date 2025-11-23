@@ -17,4 +17,7 @@ use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 return function (RoutingConfigurator $routes) {
     $routes->add('svc_contact_form', '/contact/')
         ->controller([ContactController::class, 'contactForm']);
+
+    $routes->add('svc_contact_form_modal', '/contact/modal')
+        ->controller([ContactController::class, 'contactFormModal']);
 };

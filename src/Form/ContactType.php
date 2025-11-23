@@ -57,7 +57,7 @@ class ContactType extends AbstractType
             ->add('text', TextareaType::class, [
                 'label' => 'Your message',
                 'attr' => [
-                    'rows' => 6,
+                    'rows' => 4,
                     'required' => true,
                     'aria-label' => 'Your message content',
                     'aria-describedby' => 'message-help',
@@ -99,7 +99,7 @@ class ContactType extends AbstractType
                 ],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Your mail',
+                'label' => 'Your email',
                 'attr' => [
                     'required' => true,
                     'aria-label' => 'Your email address',

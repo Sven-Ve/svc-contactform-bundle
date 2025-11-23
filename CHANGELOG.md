@@ -141,3 +141,8 @@
 ## Version 5.5.0
 *Wed, 19 Nov 2025 15:28:42 +0000*
 - Tested with svc-utilbundle 7.x too.
+
+
+## Version 6.0.0
+*Sun, 23 Nov 2025 13:57:30 +0000*
+- Add modal dialog support for contact form using svc/util-bundle modal controller (requires svc/util-bundle ^8.0.1)

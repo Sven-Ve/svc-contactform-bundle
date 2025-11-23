@@ -12,8 +12,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$version = '5.5.0';
-$message = 'Tested with svc-utilbundle 7.x too.';
+$version = '6.0.0';
+$message = 'Add modal dialog support for contact form using svc/util-bundle modal controller (requires svc/util-bundle ^8.0.1)';
 
 echo "Running phpstan:\n";
 system('composer run-script phpstan', $res);

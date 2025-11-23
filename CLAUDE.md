@@ -37,8 +37,11 @@ vendor/bin/phpstan analyse -c .phpstan.neon  # Direct PHPStan execution
 
 ### Bundle Structure
 - **Main Bundle Class**: `src/SvcContactformBundle.php` - Uses new Symfony bundle configuration system
-- **Controller**: `src/Controller/ContactController.php` - Handles form display and submission
+- **Controller**: `src/Controller/ContactController.php` - Handles form display and submission (both standard page and modal)
 - **Form Type**: `src/Form/ContactType.php` - Defines contact form structure
+- **Templates**:
+  - `templates/contact/contact.html.twig` - Standard page display with base template
+  - `templates/contact/contact_modal.html.twig` - Modal version wrapped in Turbo Frame
 - **Testing Kernel**: `tests/SvcContactformTestingKernel.php` - Custom kernel for testing
 
 ### Configuration
@@ -51,6 +54,10 @@ _svc_contactform:
     resource: '@SvcContactformBundle/config/routes.php'
     prefix: /svc-contactform/{_locale}  # Optional: add locale support
 ```
+
+**Available Routes**:
+- `svc_contact_form` - Standard contact form page (path: `/contact/`)
+- `svc_contact_form_modal` - Modal version for AJAX loading (path: `/contact/modal`)
 
 **Bundle Configuration**:
 The bundle supports these configuration options (defined in `SvcContactformBundle.php:configure()`):
@@ -68,9 +75,29 @@ svc_contactform:
 
 ### Dependencies
 - Core: Symfony Framework Bundle, Form, Twig Bundle, Translation
-- Utility: `svc/util-bundle` (internal dependency)
+- Utility: `svc/util-bundle` ^8.0.1 (internal dependency)
 - Optional: `karser/karser-recaptcha3-bundle` for CAPTCHA functionality
 - CSS: Bootstrap (not included, must be provided by consuming application)
+- Frontend: Turbo (Hotwired Turbo) - required for modal functionality
+
+### Modal Dialog Feature (Version 6.0.0+)
+
+The bundle provides two display modes:
+1. **Standard Page** - Traditional full-page contact form
+2. **Modal Dialog** - Contact form in a native `<dialog>` element
+
+**Modal Implementation**:
+- Uses `svc/util-bundle` modal Stimulus controller
+- Form wrapped in Turbo Frame (`<turbo-frame id="modal-contact-form">`)
+- Validation errors stay within modal (modal doesn't close)
+- On success: modal closes, Turbo navigates to `route_after_send`
+- Template: `templates/contact/contact_modal.html.twig`
+
+**Key Technical Points**:
+- HTML5 validation works in modal
+- Server-side Symfony validation displays errors in modal without closing it
+- Controller method `contactFormModal()` handles modal requests
+- Private method `handleContactForm()` shared by both standard and modal routes
 
 ### Testing
 Uses PHPUnit 12.3 with a custom testing kernel. Tests cover both the form and controller functionality. The bundle uses `phpunit.xml.dist` configuration with a custom `KERNEL_CLASS`.
@@ -106,3 +133,4 @@ new Length([
 ```
 
 This applies to all constraints in `src/Form/ContactType.php` and any future form types.
+- nicht changelog.md selbst aktualisieren. dies passiert über das release script bin/release.php. dort jeweils einen release text eintragen und die versionsnummer anpassen

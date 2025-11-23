@@ -1,0 +1,15 @@
+{% trans_default_domain 'ContactformBundle' %}
+<turbo-frame id="modal-contact-form">
+	<div class='svc-contactform-modal'>
+		{{ form_start(form, {
+			'attr': {
+				'aria-label': 'Contact form',
+				'action': path('svc_contact_form_modal'),
+				'method': 'POST'
+			}
+		}) }}
+			{{ form_errors(form) }}
+			{{ form_widget(form) }}
+		{{ form_end(form) }}
+	</div>
+</turbo-frame>
