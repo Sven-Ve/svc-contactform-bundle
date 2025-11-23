@@ -146,3 +146,8 @@
 ## Version 6.0.0
 *Sun, 23 Nov 2025 13:57:30 +0000*
 - Add modal dialog support for contact form using svc/util-bundle modal controller (requires svc/util-bundle ^8.0.1)
+
+
+## Version 6.0.1
+*Sun, 23 Nov 2025 14:43:19 +0000*
+- Fix: Disable CAPTCHA for modal mode due to Turbo Frame compatibility issues; Change CAPTCHA action_name from 'homepage' to 'contact'

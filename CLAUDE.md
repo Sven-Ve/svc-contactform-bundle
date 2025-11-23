@@ -99,6 +99,14 @@ The bundle provides two display modes:
 - Controller method `contactFormModal()` handles modal requests
 - Private method `handleContactForm()` shared by both standard and modal routes
 
+**CAPTCHA Limitations (Version 6.0.1+)**:
+- **CAPTCHA is automatically disabled for modal mode** (`ContactController.php:72`)
+- Technical reason: Google reCAPTCHA v3 uses asynchronous JavaScript loading that conflicts with Turbo Frame's dynamic content loading mechanism
+- When the modal content is loaded via Turbo Frame, the reCAPTCHA script may not initialize properly or fires before the DOM is fully ready
+- Standard page mode: CAPTCHA works normally (respects `enable_captcha` configuration)
+- Modal mode: CAPTCHA is always disabled regardless of configuration
+- The `action_name` for CAPTCHA is set to `'contact'` (semantic identifier) instead of the generic `'homepage'` (`ContactType.php:134`)
+
 ### Testing
 Uses PHPUnit 12.3 with a custom testing kernel. Tests cover both the form and controller functionality. The bundle uses `phpunit.xml.dist` configuration with a custom `KERNEL_CLASS`.
 

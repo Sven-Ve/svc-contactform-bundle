@@ -131,7 +131,7 @@ class ContactType extends AbstractType
         if ($options['enableCaptcha']) {
             $builder->add('captcha', Recaptcha3Type::class, [
                 'constraints' => new Recaptcha3(),
-                'action_name' => 'homepage',
+                'action_name' => 'contact',
                 'attr' => [
                     'aria-label' => 'Please complete the CAPTCHA verification',
                 ],

@@ -68,8 +68,11 @@ class ContactController extends AbstractController
         }
         $data = $this->userDataExtractor->extractUserData($user);
 
+        // CAPTCHA is disabled for modal mode due to Turbo Frame compatibility issues
+        // reCAPTCHA v3's async JS loading conflicts with Turbo Frame's dynamic content loading
+        // The script may not initialize properly or fires before DOM is ready in the Turbo Frame context
         $form = $this->createForm(ContactType::class, $data, [
-            'enableCaptcha' => $this->enableCaptcha, 'copyToMe' => $this->copyToMe,
+            'enableCaptcha' => $isModal ? false : $this->enableCaptcha, 'copyToMe' => $this->copyToMe,
         ]);
         $form->handleRequest($request);
 

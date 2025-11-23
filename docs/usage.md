@@ -38,6 +38,7 @@ svc_contactform:
     route_after_send: index
 
     # Enable captcha for contact form (optional, default: false)
+    # Note: CAPTCHA is automatically disabled for modal mode (see CAPTCHA section below)
     enable_captcha: false
 
     # Enable sending a copy of the contact request to sender (optional, default: true)
@@ -117,3 +118,33 @@ Since version 6.0.0, you can also display the contact form in a modal dialog usi
 - HTML5 validation works in the modal
 - Server-side Symfony validation errors are displayed within the modal without closing it
 - The form stays in the modal until successfully submitted
+
+## CAPTCHA Support
+
+### Standard Page Mode
+
+When `enable_captcha: true` is configured, the contact form on the standard page (`svc_contact_form` route) will include Google reCAPTCHA v3 protection.
+
+**Requirements:**
+- Install and configure `karser/karser-recaptcha3-bundle`
+- Configure your reCAPTCHA v3 site key and secret key
+
+**CAPTCHA Action Name:** The contact form uses the action name `'contact'` for reCAPTCHA (semantic identifier for analytics).
+
+### Modal Mode - CAPTCHA Limitations
+
+:warning: **Important:** Since version 6.0.1, CAPTCHA is automatically disabled for modal mode.
+
+**Technical Reason:**
+Google reCAPTCHA v3 relies on asynchronous JavaScript loading that conflicts with Turbo Frame's dynamic content loading mechanism. When modal content is loaded via Turbo Frame:
+- The reCAPTCHA script may not initialize properly
+- The script may fire before the DOM is fully ready within the Turbo Frame context
+- This causes validation failures and poor user experience
+
+**Behavior:**
+- Standard page mode: Respects the `enable_captcha` configuration setting
+- Modal mode: CAPTCHA is always disabled, regardless of configuration
+- Implementation: See `ContactController.php:72` where `$isModal ? false : $this->enableCaptcha` ensures CAPTCHA is disabled for modal requests
+
+**Recommendation:**
+If CAPTCHA protection is critical for your use case, use the standard page display mode instead of the modal dialog

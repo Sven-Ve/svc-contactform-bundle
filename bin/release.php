@@ -12,8 +12,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$version = '6.0.0';
-$message = 'Add modal dialog support for contact form using svc/util-bundle modal controller (requires svc/util-bundle ^8.0.1)';
+$version = '6.0.1';
+$message = 'Fix: Disable CAPTCHA for modal mode due to Turbo Frame compatibility issues; Change CAPTCHA action_name from \'homepage\' to \'contact\'';
 
 echo "Running phpstan:\n";
 system('composer run-script phpstan', $res);
