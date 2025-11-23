@@ -151,3 +151,8 @@
 ## Version 6.0.1
 *Sun, 23 Nov 2025 14:43:19 +0000*
 - Fix: Disable CAPTCHA for modal mode due to Turbo Frame compatibility issues; Change CAPTCHA action_name from 'homepage' to 'contact'
+
+
+## Version 6.0.2
+*Sun, 23 Nov 2025 19:14:53 +0000*
+- Add honeypot spam protection for both standard and modal modes with silent rejection
