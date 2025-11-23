@@ -156,3 +156,8 @@
 ## Version 6.0.2
 *Sun, 23 Nov 2025 19:14:53 +0000*
 - Add honeypot spam protection for both standard and modal modes with silent rejection
+
+
+## Version 6.1.0
+*Sun, 23 Nov 2025 19:48:08 +0000*
+- Add comprehensive test suite with email assertions and expand test coverage from 5 to 15 tests

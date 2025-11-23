@@ -12,8 +12,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$version = '6.0.2';
-$message = 'Add honeypot spam protection for both standard and modal modes with silent rejection';
+$version = '6.1.0';
+$message = 'Add comprehensive test suite with email assertions and expand test coverage from 5 to 15 tests';
 
 echo "Running phpstan:\n";
 system('composer run-script phpstan', $res);

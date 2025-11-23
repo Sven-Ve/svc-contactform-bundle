@@ -47,9 +47,23 @@ class SvcContactformTestingKernel extends Kernel
             'validation' => [
                 'enabled' => true,
             ],
+            'csrf_protection' => true,
+            'session' => [
+                'storage_factory_id' => 'session.storage.factory.mock_file',
+            ],
+            'mailer' => [
+                'dsn' => 'null://default',
+            ],
         ];
 
         $container->loadFromExtension('framework', $config);
+
+        $container->loadFromExtension('svc_util', [
+            'mailer' => [
+                'mail_address' => 'noreply@test.com',
+                'mail_name' => 'Test Mailer',
+            ],
+        ]);
 
         $container->loadFromExtension('svc_contactform', [
             'contact_mail' => 'test@example.com',
@@ -67,5 +81,8 @@ class SvcContactformTestingKernel extends Kernel
     private function configureRoutes(RoutingConfigurator $routes)
     {
         $routes->import(__DIR__ . '/../config/routes.php')->prefix('/contactform/{_locale}');
+
+        // Add index route for redirect after form submission
+        $routes->add('index', '/')->controller([Controller\IndexController::class, 'index']);
     }
 }

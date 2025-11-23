@@ -116,7 +116,51 @@ The bundle provides two display modes:
 - Especially important for modal mode where CAPTCHA is disabled
 
 ### Testing
-Uses PHPUnit 12.3 with a custom testing kernel. Tests cover both the form and controller functionality. The bundle uses `phpunit.xml.dist` configuration with a custom `KERNEL_CLASS`.
+
+Uses PHPUnit 12.4 with a custom testing kernel (`SvcContactformTestingKernel`). Tests cover controller, form functionality, and email assertions.
+
+**Test Structure** (`tests/Controller/ContactControllerTest.php`):
+- **15 comprehensive tests** covering all major functionality
+- Uses `KernelTestCase` (not `WebTestCase`) to match `svc/util-bundle` testing approach
+- Email assertions work with `null://default` mailer transport
+
+**Test Coverage**:
+1. **GET Request Tests** - Standard and modal form display, multilingual (EN/DE)
+2. **POST Request Tests with Email Verification**:
+   - Successful form submission → Email sent and counted with `assertEmailCount(1)`
+   - Honeypot spam protection → No email sent when honeypot field filled (`assertEmailCount(0)`)
+   - Form validation errors (empty fields, invalid email, whitespace-only)
+   - CopyToMe checkbox → CC header verification
+3. **Modal-Specific Tests**:
+   - CAPTCHA disabled for modal mode
+   - Turbo Frame response with `dialog.close()` script
+   - Honeypot field hidden with CSS
+
+**Test Configuration** (`SvcContactformTestingKernel.php`):
+```php
+'mailer' => [
+    'dsn' => 'null://default',  // IMPORTANT: Use 'default', not 'null'
+],
+```
+
+**Critical Testing Notes**:
+- ✅ Use `$client->submitForm('contact[Send]', $formData)` for POST requests
+- ❌ Do NOT use `$client->request('POST', ...)` - causes form submission issues
+- ✅ Checkbox fields: omit from `$formData` when unchecked (don't send `'0'`)
+- ❌ Invalid: `'contact[copyToMe]' => '0'` throws exception
+- ✅ Email assertions: `$this->assertEmailCount(n)`, `$this->getMailerMessage()`, `$this->assertEmailHasHeader()`
+- ⚠️ Validation errors return HTTP 422 (Unprocessable Entity), not 200
+
+**Test Dependencies** (dev-only):
+- `symfony/security-csrf` - CSRF token support in tests
+- `symfony/css-selector` - DOM crawler CSS selector support
+
+**Running Specific Tests**:
+```bash
+vendor/bin/phpunit --filter testSubmitContactFormWithValidData
+vendor/bin/phpunit --filter Honeypot  # Run all honeypot tests
+vendor/bin/phpunit --testdox tests/Controller/ContactControllerTest.php
+```
 
 ### Static Analysis
 PHPStan configured at level 8 with specific ignore patterns for Symfony and reCAPTCHA bundle classes that may not be available during static analysis.
