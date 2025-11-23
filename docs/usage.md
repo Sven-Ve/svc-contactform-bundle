@@ -148,3 +148,34 @@ Google reCAPTCHA v3 relies on asynchronous JavaScript loading that conflicts wit
 
 **Recommendation:**
 If CAPTCHA protection is critical for your use case, use the standard page display mode instead of the modal dialog
+
+## Spam Protection
+
+### Honeypot Field
+
+Since version 6.0.2, the contact form includes an automatic honeypot field for spam protection. This works for both standard page and modal modes.
+
+**How it works:**
+- An invisible field named `website` is added to the form
+- Legitimate users never see or interact with this field
+- Bots typically auto-fill all form fields, including hidden ones
+- If this field contains any value, the submission is silently rejected
+
+**Implementation details:**
+- The field uses CSS positioning to hide it completely (`position:absolute;left:-9999px`)
+- Has `tabindex="-1"` so keyboard navigation skips it
+- Has `aria-hidden="true"` for screen reader accessibility
+- Marked with `autocomplete="off"` to prevent browser auto-fill
+
+**Silent rejection:**
+- Bot submissions show a success message but no email is sent
+- This prevents bots from detecting the honeypot mechanism
+- Logs can be added for monitoring spam attempts if needed
+
+**Benefits:**
+- No user interaction required (unlike CAPTCHA)
+- Works seamlessly with Turbo Frames (unlike reCAPTCHA v3)
+- GDPR-friendly (no third-party scripts or cookies)
+- Effective against basic form spam bots
+
+This provides basic spam protection for the modal mode where CAPTCHA is disabled. For maximum protection, combine honeypot (modal) with reCAPTCHA (standard page mode).

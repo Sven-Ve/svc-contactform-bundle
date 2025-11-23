@@ -77,6 +77,29 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Honeypot validation - if the hidden field is filled, it's likely a bot
+            $honeypot = $form->get('website')->getData();
+            if (!empty($honeypot)) {
+                // Silent rejection - don't reveal the honeypot to the bot
+                $this->addFlash('success', $this->t('Contact request sent.'));
+
+                if ($isModal) {
+                    $response = new Response(
+                        '<turbo-frame id="modal-contact-form">' .
+                        '<script type="text/javascript">' .
+                        'const dialog = document.querySelector("dialog[open]");' .
+                        'if (dialog) { dialog.close(); }' .
+                        'Turbo.visit("' . $this->generateUrl($this->routeAfterSend) . '");' .
+                        '</script>' .
+                        '</turbo-frame>'
+                    );
+
+                    return $response;
+                }
+
+                return $this->redirectToRoute($this->routeAfterSend);
+            }
+
             $email = trim($form->get('email')->getData());
             $name = trim($form->get('name')->getData());
             $content = trim($form->get('text')->getData());

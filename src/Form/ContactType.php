@@ -128,6 +128,20 @@ class ContactType extends AbstractType
             ]);
         }
 
+        // Honeypot field for spam protection (especially useful for modal mode where CAPTCHA is disabled)
+        // This field should remain empty - bots typically auto-fill all fields
+        $builder->add('website', TextType::class, [
+            'mapped' => false,
+            'required' => false,
+            'label' => false,
+            'attr' => [
+                'style' => 'position:absolute;left:-9999px;width:1px;height:1px;',
+                'tabindex' => '-1',
+                'autocomplete' => 'off',
+                'aria-hidden' => 'true',
+            ],
+        ]);
+
         if ($options['enableCaptcha']) {
             $builder->add('captcha', Recaptcha3Type::class, [
                 'constraints' => new Recaptcha3(),
