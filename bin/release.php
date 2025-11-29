@@ -12,8 +12,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$version = '6.1.0';
-$message = 'Add comprehensive test suite with email assertions and expand test coverage from 5 to 15 tests';
+$version = '6.2.0';
+$message = 'tested with symfony 7.4 and symfony 8.';
 
 echo "Running phpstan:\n";
 system('composer run-script phpstan', $res);

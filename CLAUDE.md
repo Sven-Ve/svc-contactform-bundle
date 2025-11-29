@@ -193,4 +193,7 @@ new Length([
 ```
 
 This applies to all constraints in `src/Form/ContactType.php` and any future form types.
-- nicht changelog.md selbst aktualisieren. dies passiert über das release script bin/release.php. dort jeweils einen release text eintragen und die versionsnummer anpassen
+
+## Release Process
+
+**Important**: Do not manually update `CHANGELOG.md` or create git tags. The release process is handled manually by the maintainer using `bin/release.php`, which automatically updates the changelog and creates version tags.

@@ -161,3 +161,8 @@
 ## Version 6.1.0
 *Sun, 23 Nov 2025 19:48:08 +0000*
 - Add comprehensive test suite with email assertions and expand test coverage from 5 to 15 tests
+
+
+## Version 6.2.0
+*Sat, 29 Nov 2025 16:14:38 +0000*
+- tested with symfony 7.4 and symfony 8.
